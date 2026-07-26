@@ -6,5 +6,9 @@ concurrency, and stable input ordering.
 ```ts
 import { filterPromises } from "@lucid-softworks/promise-filter";
 
-const existing = await filterPromises(ids, database.has, { concurrency: 8 });
+const ids = ["user-1", "user-2", "user-3"];
+const database = new Set(["user-1", "user-3"]);
+const existing = await filterPromises(ids, (id) => database.has(id), {
+  concurrency: 8,
+});
 ```
